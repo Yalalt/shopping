@@ -1,10 +1,12 @@
 import React from "react";
 
+import Burger from '../../components/Burger';
+
 class BurgerBuilder extends React.Component {
   render() {
     return (<div>
-      <div>Hachirtai bread</div>
-      <div>Ingredients</div>
+      <Burger />
+      <div>Ingredients control</div>
     </div>);
   }
 }
