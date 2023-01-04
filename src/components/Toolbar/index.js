@@ -1,5 +1,11 @@
 import React from "react";
 
-const Toolbar = () => <div>Toolbar</div>;
+import styles from "./style.module.css";
+
+const Toolbar = () => <header className={styles.Toolbar}>
+    <div>Hamburger Menu </div>
+    <div>Logo</div>
+    <nav>Menu</nav>
+</header>;
 
 export default Toolbar;
