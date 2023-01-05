@@ -1,16 +1,15 @@
-import React from 'react';
-import css from './style.module.css';
+import React from "react";
+import css from "./style.module.css";
 
-import Toolbar from '../../components/Toolbar';
-import BurgerBuilder from '../BurgerBuilder';
+import Toolbar from "../../components/Toolbar";
+import BurgerBuilder from "../BurgerBuilder";
 
 function App() {
   return (
     <div>
       <Toolbar />
       <main className={css.Content}>
-      <BurgerBuilder />
-
+        <BurgerBuilder />
       </main>
     </div>
   );
