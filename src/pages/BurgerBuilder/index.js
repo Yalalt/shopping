@@ -22,21 +22,29 @@ class BurgerBuilder extends React.Component {
   }
   
   ortsHasah = (type) => {
-    const minusIngredients = {...this.state.ingredients};
-    // Hasah tooruu orohgvi hamgaalaw
-    minusIngredients[type] > 0? minusIngredients[type]--: console.log("Error 0000");
-    
-    // What is number see
-    console.log(minusIngredients[type]);
-    this.setState({ingredients: minusIngredients});
+    if (this.state.ingredients[type] > 0) {
+      const minusIngredients = {...this.state.ingredients};
 
+      // Hasah tooruu orohgvi hamgaalaw
+      minusIngredients[type]--;
+      
+      // What is number see
+      console.log(minusIngredients[type]);
+      this.setState({ingredients: minusIngredients});
+    }
   }
 
   render() {
+    const disabledIngredients = { ...this.state.ingredients };
+
+    for(let key in disabledIngredients) {
+      disabledIngredients[key] = disabledIngredients[key] <= 0;
+    }
+
     return (
       <div>
         <Burger ingredients={this.state.ingredients} />
-        <BuildControls ortsNemeh={this.ortsNemeh} ortsHasah={this.ortsHasah} />
+        <BuildControls disabledIngredients={disabledIngredients} ortsNemeh={this.ortsNemeh} ortsHasah={this.ortsHasah} />
       </div>
     );
   }
