@@ -1,11 +1,18 @@
 import React from "react";
 
 import styles from "./style.module.css";
+import Logo from "../Logo";
+import Menu from "../Menu";
+import HamburgerMenu from "../HamburgerMenu";
 
-const Toolbar = () => <header className={styles.Toolbar}>
-    <div>Hamburger Menu </div>
-    <div>Logo</div>
-    <nav>Menu</nav>
-</header>;
+const Toolbar = (props) => (
+  <header className={styles.Toolbar}>
+    <HamburgerMenu toggleSideBar={props.toggleSideBar} />
+    <Logo />
+    <nav className={styles.HideMobile}>
+      <Menu />
+    </nav>
+  </header>
+);
 
 export default Toolbar;
