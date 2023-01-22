@@ -3,6 +3,8 @@ import Burger from "../../components/Burger";
 import BuildControls from "../../components/BuildControls";
 import Modal from "../../components/General/Modal";
 import OrderSummary from "../../components/OrderSummary";
+import axios from "../../axios-orders";
+import Spinner from "../../components/General/Spinner";
 
 const INGREDIENTS_PRICES = { salad: 150, cheese: 250, bacon: 800, meat: 1500 };
 
@@ -13,7 +15,7 @@ const INGREDIENTS_NAMES = {
   meat: "Үхрийн мах",
 };
 
-class BurgerBuilder extends React.Component {
+class BurgerPage extends React.Component {
   state = {
     ingredients: {
       salad: 0,
@@ -23,21 +25,39 @@ class BurgerBuilder extends React.Component {
     },
     totalPrice: 1000,
     purchasing: false,
-    confirmOrder: false,
+    confirmOrder: false
   };
 
+
+
   continueOrder = () => {
-    console.log("Continue daragdlaa ...");
-  }
+    const order = {
+      orts: this.state.ingredients,
+      dun: this.state.totalPrice,
+      address: {
+        name: "Batnyam",
+        city: "UB",
+        street: "Bayangol district UB apartment 503",
+      },
+    };
+
+    this.setState({ loading: true });
+    axios
+      .post("/orders.json", order)
+      .then((response) => {})
+      .finally(() => {
+        this.setState({ loading: false });
+      });
+  };
 
   // state merge
   showConfirmModal = () => {
-    this.setState({confirmOrder: true});
-  }
+    this.setState({ confirmOrder: true });
+  };
 
   closeConfirmModal = () => {
-    this.setState({confirmOrder: false});
-  }
+    this.setState({ confirmOrder: false });
+  };
 
   ortsNemeh = (type) => {
     const newIngredients = { ...this.state.ingredients };
@@ -82,18 +102,21 @@ class BurgerBuilder extends React.Component {
 
     return (
       <div>
-        <Modal 
-        show={this.state.confirmOrder}
-        closeConfirmModal={this.closeConfirmModal}
+        <Modal
+          show={this.state.confirmOrder}
+          closeConfirmModal={this.closeConfirmModal}
         >
-          <OrderSummary
-            onCancel={this.closeConfirmModal}
-            onContinue={this.continueOrder}
-            price={this.state.totalPrice}
-            ingredientsNames={INGREDIENTS_NAMES}
-            ingredients={this.state.ingredients}
-          />
+          
+            <OrderSummary
+              onCancel={this.closeConfirmModal}
+              onContinue={this.continueOrder}
+              price={this.state.totalPrice}
+              ingredientsNames={INGREDIENTS_NAMES}
+              ingredients={this.state.ingredients}
+            />
+          
         </Modal>
+        
         <Burger ingredients={this.state.ingredients} />
         <BuildControls
           showConfirmModal={this.showConfirmModal}
@@ -109,4 +132,4 @@ class BurgerBuilder extends React.Component {
   }
 }
 
-export default BurgerBuilder;
+export default BurgerPage;
