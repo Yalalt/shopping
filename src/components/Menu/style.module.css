@@ -1,16 +1,15 @@
 .Menu {
-    list-style: none;
-    display: flex;
-    flex-flow: column;
-    align-items: flex-start;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    align-items: center;
+  list-style: none;
+  display: flex;
+  flex-flow: column;
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  align-items: center;
 }
 
 @media (min-width: 500px) {
-    .Menu {
-        flex-flow: row;
-    }
+  .Menu {
+    flex-flow: row;
+  }
 }
